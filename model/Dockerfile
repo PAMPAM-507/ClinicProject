@@ -10,6 +10,9 @@ RUN pip install scipy requests djangorestframework-simplejwt
 RUN pip install --upgrade pip
 COPY ./APIForModel ./APIForModel
 
+
+
+
 EXPOSE 8001
 
 

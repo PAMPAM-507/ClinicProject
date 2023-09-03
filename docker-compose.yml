@@ -10,27 +10,29 @@ services:
 # webauth = ClinicProject
 
 
-#  webapp:
-#    restart: always
-#    build:
-#      context: ./webapp
-#    volumes:
-#      - ./webapp:/webapp
-#      # Подключаем статические и медиа файлы
-#      - static_volume:/webapp/ClinicProject/static
-#      - media_volume:/webapp/ClinicProject/media
-#    # ports:
-#    #   - "8000:8000"
-#    expose:
-#      - 8000
-#    # command: ["python3", "./ClinicProject/manage.py", "runserver", "0.0.0.0:8000"]
-#    # command: ["uwsgi", "--http", "0.0.0.0:8000", "--module", "ClinicProject.wsgi"]
-#    # command: gunicorn ./webapp/ClinicProject.wsgi:application --bind 0.0.0.0:8000
-#    command: bash -c "cd ./ClinicProject && gunicorn ClinicProject.wsgi:application --bind 0.0.0.0:8000"
-#    depends_on:
-#      - beat
-#      - redis
-#      - worker
+ # webapp:
+ #   restart: always
+ #   build:
+ #     context: ./webapp
+ #   volumes:
+ #     - ./webapp:/webapp
+ #     # Подключаем статические и медиа файлы
+ #     - static_volume:/webapp/ClinicProject/static
+ #     - media_volume:/webapp/ClinicProject/media
+ #   # ports:
+ #   #   - "8000:8000"
+ #   expose:
+ #     - 8000
+ #   env_file:
+ #     - ./.env.dev
+ #   # command: ["python3", "./ClinicProject/manage.py", "runserver", "0.0.0.0:8000"]
+ #   # command: ["uwsgi", "--http", "0.0.0.0:8000", "--module", "ClinicProject.wsgi"]
+ #   # command: gunicorn ./webapp/ClinicProject.wsgi:application --bind 0.0.0.0:8000
+ #   command: bash -c "cd ./ClinicProject && gunicorn ClinicProject.wsgi:application --bind 0.0.0.0:8000"
+ #   depends_on:
+ #     - beat
+ #     - redis
+ #     - worker
 #
 #  beat:
 #    restart: always
@@ -49,9 +51,15 @@ services:
       context: ./model
     volumes:
      - ./model:/model
+    environment:
+        - SECRET_KEY_FOR_MODEL=django-insecure-=16ad-od5n73okd$mtl^@!*qo#f4tyo7wumlo_&htu#4c9(zv-
     ports:
       - "8001:8001"
+    env_file:
+      - ./.env.dev
     command: ["python3", "./APIForModel/manage.py", "runserver", "0.0.0.0:8001"]
+    # command: sh -c "chmod +x /model/setenv.sh && /model/setenv.sh && python3 ./APIForModel/manage.py runserver 0.0.0.0:8001"
+
 
 
 #  nginx:

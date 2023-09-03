@@ -5,4 +5,5 @@ venv
 **/~*
 **/venv
 **/setenv.sh
+**/.env.dev
 

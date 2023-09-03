@@ -17,6 +17,7 @@ RUN pip install --upgrade pip
 RUN pip install wheel
 RUN apt-get install uwsgi -y
 RUN pip install gunicorn
+RUN source ClinicProject/setenv.sh
 
 
 

@@ -1,0 +1,14 @@
+{% extends 'ClinicWebsite/base.html' %}
+
+{% block position %}
+
+{%for i in positions%}
+    {% if i.slug == cur_position %}
+        <p>{{i.position}}</p>
+    {% else %}
+        <p><a href="{{ i.get_absolute_url }}">{{i.position}}</a></p>
+    {% endif %}
+{% endfor %}
+
+{% endblock position %}
+

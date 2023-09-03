@@ -1,0 +1,53 @@
+{% extends 'ClinicWebsite/base.html' %}
+
+{% block content %}
+
+
+
+{% for i in visitMenu%}
+    <a href = "{% url 'watchVisits' userId %}?url={{i.url}}">{{i.title}}</a>
+{% endfor %}
+
+<br>
+<br>
+{% if flag %}
+    {% for i in information %}
+        {% if i.confirmationOfVisit %}
+            <a href = "{{i.get_url_for_watchVisit}}">{{i.dateOfVisit}}</a>
+            {{i.employee}} | {{i.client}}
+            <hr>
+        {% else %}
+            <a href = "{{i.get_url_for_watchVisit}}">{{i.dateOfVisit}}</a>
+            {{i.employee}} | {{i.client}} | Активная запись!
+            <br>
+            <br>
+            <form action="{% url 'dropVisitDoctor' i.pk %}" method="post">            
+                {% csrf_token %}
+                <button type="submit">Отменить запись</button>
+            </form>
+            <hr>
+        {% endif %}
+
+    {% endfor %}
+{% else %}
+    {% for i in information %}
+    {% if i.confirmationOfVisit %}
+        {{i.dateOfVisit}}
+        {{i.employee}}
+        <hr>
+    {% else %}
+        {{i.dateOfVisit}}
+        {{i.employee}} | {{i.client}} | Активная запись!
+        <br>
+        <br>
+        <form action="{% url 'dropVisitDoctor' i.pk %}" method="post">            
+            {% csrf_token %}
+            <button type="submit">Отменить запись</button>
+        </form>
+        <hr>
+    {% endif %}
+
+    {% endfor %}
+{% endif%}
+
+{% endblock content %}

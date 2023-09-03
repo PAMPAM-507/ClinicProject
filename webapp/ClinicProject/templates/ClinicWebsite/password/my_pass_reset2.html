@@ -1,0 +1,18 @@
+{% extends 'Clinicwebsite/base.html' %}
+
+{% block content %}
+
+{% if message %}
+    <h1>{{message}}</h1>
+{% endif %}
+
+<form method="post">
+    {% csrf_token %}
+    {% for f in form %}
+        <div>{{ form.non_field_errors }}</div>
+        <p><label for="{{ f.id_for_label }}">{{ f.label }}</label>{{ f }}</p>
+        <div>{{ f.errors }}</div>
+    {% endfor %}
+    <button type="submit">Смена пароля</button>
+</form>
+{% endblock content %}

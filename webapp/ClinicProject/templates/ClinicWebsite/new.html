@@ -1,0 +1,14 @@
+{% extends 'ClinicWebsite/base.html' %}
+
+
+{% block content %}
+
+<h1>{{ new.title }}</h1>
+
+{% if new.photo %}
+  <p><img src = "{{ new.photo.url }}" width="189" height="255"></p>
+{% endif %}
+
+{{ new.text | linebreaks }}
+
+{% endblock content %}

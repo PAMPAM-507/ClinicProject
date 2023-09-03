@@ -1,0 +1,226 @@
+{% extends 'ClinicWebsite/base.html' %}
+{% load my_filters %}
+
+
+{% block content %}
+<p>Выберите специализацию врача</p>
+
+{% for position in positions %}
+  {% if position.slug == cur_position %}
+    <p>{{position.position}}</p>
+  {% else %}
+    <p><a href="{{position.get_absolute_url_for_listOfVisits}}">{{position.position}}</a></p>
+  {% endif %}
+{% endfor %}
+
+<!--{% for i in DateSortEntries %}
+  <p>{{i.dateOfVisit}}</p>
+  <p>{{i.employee.name}}</p>
+  <p>{{i.employee.position}}</p>
+  <p><img src="{{i.employee.photo.url}}" width="100" height="100"></p>
+{% endfor %}-->
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="7">
+        Месяц {{ month_string }} {{ year }}
+      </th>
+    </tr>
+    <tr>
+      <td>Пн</td>
+      <td>Вт</td>
+      <td>Ср</td>
+      <td>Чт</td>
+      <td>Пт</td>
+      <td>Сб</td>
+      <td>Вс</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      {% for i in firstweekday|create_range %}
+          <td></td>
+        {% endfor %}
+      {% for day in firstweek %}
+
+        {% if month > cur_month and year >= cur_year %}
+          <td><a href="{% url 'DecideToHaveVisitDoctor' cur_position %}?day={{day}}&month={{month}}&year={{year}}">{{ day }}</a></td>
+
+        {% elif month < cur_month and year > cur_year %}
+          <td><a href="{% url 'DecideToHaveVisitDoctor' cur_position %}?day={{day}}&month={{month}}&year={{year}}">{{ day }}</a></td>
+
+        {% elif month == cur_month and year > cur_year %}
+          <td><a href="{% url 'DecideToHaveVisitDoctor' cur_position %}?day={{day}}&month={{month}}&year={{year}}">{{ day }}</a></td>
+
+        {% elif month < cur_month and year <= cur_year %}
+          <td>{{ day }}</td>
+
+        {% elif month > cur_month and year < cur_year %}
+          <td>{{ day }}</td>
+
+        {% elif month == cur_month and year < cur_year %}
+          <td>{{ day }}</td>
+
+        {% elif day >= current_day %}
+          <td><a href="{% url 'DecideToHaveVisitDoctor' cur_position %}?day={{day}}&month={{month}}&year={{year}}">{{ day }}</a></td>
+
+        {% else %}
+          <td>{{ day }}</td>
+        {% endif %}
+
+      {% endfor %}
+    <tr>
+      {% for day in secondweek %}
+
+        {% if month > cur_month and year >= cur_year %}
+          <td><a href="{% url 'DecideToHaveVisitDoctor' cur_position %}?day={{day}}&month={{month}}&year={{year}}">{{ day }}</a></td>
+
+        {% elif month < cur_month and year > cur_year %}
+          <td><a href="{% url 'DecideToHaveVisitDoctor' cur_position %}?day={{day}}&month={{month}}&year={{year}}">{{ day }}</a></td>
+
+        {% elif month == cur_month and year > cur_year %}
+          <td><a href="{% url 'DecideToHaveVisitDoctor' cur_position %}?day={{day}}&month={{month}}&year={{year}}">{{ day }}</a></td>
+
+        {% elif month < cur_month and year <= cur_year %}
+          <td>{{ day }}</td>
+
+        {% elif month > cur_month and year < cur_year %}
+          <td>{{ day }}</td>
+
+        {% elif month == cur_month and year < cur_year %}
+          <td>{{ day }}</td>
+
+        {% elif day >= current_day %}
+          <td><a href="{% url 'DecideToHaveVisitDoctor' cur_position %}?day={{day}}&month={{month}}&year={{year}}">{{ day }}</a></td>
+
+        {% else %}
+          <td>{{ day }}</td>
+        {% endif %}
+
+      {% endfor %}
+    </tr>
+    <tr>
+      {% for day in thirdweek %}
+
+        {% if month > cur_month and year >= cur_year %}
+          <td><a href="{% url 'DecideToHaveVisitDoctor' cur_position %}?day={{day}}&month={{month}}&year={{year}}">{{ day }}</a></td>
+
+        {% elif month < cur_month and year > cur_year %}
+          <td><a href="{% url 'DecideToHaveVisitDoctor' cur_position %}?day={{day}}&month={{month}}&year={{year}}">{{ day }}</a></td>
+
+        {% elif month == cur_month and year > cur_year %}
+          <td><a href="{% url 'DecideToHaveVisitDoctor' cur_position %}?day={{day}}&month={{month}}&year={{year}}">{{ day }}</a></td>
+
+        {% elif month < cur_month and year <= cur_year %}
+          <td>{{ day }}</td>
+
+        {% elif month > cur_month and year < cur_year %}
+          <td>{{ day }}</td>
+
+        {% elif month == cur_month and year < cur_year %}
+          <td>{{ day }}</td>
+
+        {% elif day >= current_day %}
+          <td><a href="{% url 'DecideToHaveVisitDoctor' cur_position %}?day={{day}}&month={{month}}&year={{year}}">{{ day }}</a></td>
+
+        {% else %}
+          <td>{{ day }}</td>
+        {% endif %}
+
+      {% endfor %}
+    </tr>
+    <tr>
+      {% for day in fourthdweek %}
+
+        {% if month > cur_month and year >= cur_year %}
+          <td><a href="{% url 'DecideToHaveVisitDoctor' cur_position %}?day={{day}}&month={{month}}&year={{year}}">{{ day }}</a></td>
+
+        {% elif month < cur_month and year > cur_year %}
+          <td><a href="{% url 'DecideToHaveVisitDoctor' cur_position %}?day={{day}}&month={{month}}&year={{year}}">{{ day }}</a></td>
+
+        {% elif month == cur_month and year > cur_year %}
+          <td><a href="{% url 'DecideToHaveVisitDoctor' cur_position %}?day={{day}}&month={{month}}&year={{year}}">{{ day }}</a></td>
+
+        {% elif month < cur_month and year <= cur_year %}
+          <td>{{ day }}</td>
+
+        {% elif month > cur_month and year < cur_year %}
+          <td>{{ day }}</td>
+
+        {% elif month == cur_month and year < cur_year %}
+          <td>{{ day }}</td>
+
+        {% elif day >= current_day %}
+          <td><a href="{% url 'DecideToHaveVisitDoctor' cur_position %}?day={{day}}&month={{month}}&year={{year}}">{{ day }}</a></td>
+
+        {% else %}
+          <td>{{ day }}</td>
+        {% endif %}
+
+      {% endfor %}
+    </tr>
+    <tr>
+      {% for day in fifthdweek %}
+
+        {% if month > cur_month and year >= cur_year %}
+          <td><a href="{% url 'DecideToHaveVisitDoctor' cur_position %}?day={{day}}&month={{month}}&year={{year}}">{{ day }}</a></td>
+
+        {% elif month < cur_month and year > cur_year %}
+          <td><a href="{% url 'DecideToHaveVisitDoctor' cur_position %}?day={{day}}&month={{month}}&year={{year}}">{{ day }}</a></td>
+
+        {% elif month == cur_month and year > cur_year %}
+          <td><a href="{% url 'DecideToHaveVisitDoctor' cur_position %}?day={{day}}&month={{month}}&year={{year}}">{{ day }}</a></td>
+
+        {% elif month < cur_month and year <= cur_year %}
+          <td>{{ day }}</td>
+
+        {% elif month > cur_month and year < cur_year %}
+          <td>{{ day }}</td>
+
+        {% elif month == cur_month and year < cur_year %}
+          <td>{{ day }}</td>
+
+        {% elif day >= current_day %}
+          <td><a href="{% url 'DecideToHaveVisitDoctor' cur_position %}?day={{day}}&month={{month}}&year={{year}}">{{ day }}</a></td>
+
+        {% else %}
+          <td>{{ day }}</td>
+        {% endif %}
+
+      {% endfor %}
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td colspan="7">
+        <a href="{% url 'DecideToHaveVisitDoctorChangeDate' cur_position month|add:-1 year %}">Предыдущий месяц</a>
+        <a href="{% url 'DecideToHaveVisitDoctorChangeDate' cur_position month|add:1 year %}">Следующий месяц</a>
+      </td>
+    </tr>
+  </tfoot>
+</table>
+
+{% if DateSortEntries %}
+  {% for i in DateSortEntries %}
+    {% for j in i %}
+      {% if j|last_chars == 'jpg'%}
+        <p><img src = "/media/{{ j }}" width="100" height="100"></p>
+      {% elif j == 1 or j == 2 or j == 3 %}
+        <p>Загруженность: {{ j }}</p>
+      {% else %}
+        <p>{{ j }}</p>
+      {% endif %}
+      {% if j|check_int and j != 1 and j != 2 and j != 3 %}
+        <form action="{% url 'makeVisitDoctor' j %}" method="post">
+        {% csrf_token %}
+         <button type="submit">Записаться на прием</button>
+        </form>
+      {% endif %}
+    {% endfor %}
+  {% endfor %}
+{% endif %}
+
+{% endblock content%}
+
+

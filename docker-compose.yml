@@ -1,0 +1,71 @@
+version: "3"
+
+services:
+  redis:
+    image: redis
+    restart: always
+    ports:
+      - 6379:6379
+
+# webauth = ClinicProject
+
+
+#  webapp:
+#    restart: always
+#    build:
+#      context: ./webapp
+#    volumes:
+#      - ./webapp:/webapp
+#      # Подключаем статические и медиа файлы
+#      - static_volume:/webapp/ClinicProject/static
+#      - media_volume:/webapp/ClinicProject/media
+#    # ports:
+#    #   - "8000:8000"
+#    expose:
+#      - 8000
+#    # command: ["python3", "./ClinicProject/manage.py", "runserver", "0.0.0.0:8000"]
+#    # command: ["uwsgi", "--http", "0.0.0.0:8000", "--module", "ClinicProject.wsgi"]
+#    # command: gunicorn ./webapp/ClinicProject.wsgi:application --bind 0.0.0.0:8000
+#    command: bash -c "cd ./ClinicProject && gunicorn ClinicProject.wsgi:application --bind 0.0.0.0:8000"
+#    depends_on:
+#      - beat
+#      - redis
+#      - worker
+#
+#  beat:
+#    restart: always
+#    build:
+#      context: ./webapp
+#    command: ['celery', '--workdir=./ClinicProject', '-A', 'ClinicProject', 'beat', '--loglevel=INFO']
+#
+#  worker:
+#    restart: always
+#    build:
+#      context: ./webapp
+#    command: ['celery', '--workdir=./ClinicProject', '-A', 'ClinicProject', 'worker']
+
+  fuzzymodel:
+    build:
+      context: ./model
+    volumes:
+     - ./model:/model
+    ports:
+      - "8001:8001"
+    command: ["python3", "./APIForModel/manage.py", "runserver", "0.0.0.0:8001"]
+
+
+#  nginx:
+#    build: ./nginx
+#    # Подключаем статические и медиа файлы
+#    volumes:
+#      - static_volume:/webapp/ClinicProject/static
+#      - media_volume:/webapp/ClinicProject/media
+#    ports:
+#      - 1337:80
+#    depends_on:
+#      - webapp
+
+# Подключаем статические и медиа файлы
+volumes:
+  static_volume:
+  media_volume:

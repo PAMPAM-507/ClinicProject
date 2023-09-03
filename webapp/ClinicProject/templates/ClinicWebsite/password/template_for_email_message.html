@@ -1,0 +1,5 @@
+{% autoescape off %} 
+Здравствуйте {{ user.username }}, 
+Пожалуйста, нажмите на ссылку, чтобы подтвердить свою регистрацию, 
+http://{{ domain }}{% url 'password_reset2' uidb64=uid token=token %} 
+{% endautoescape %}

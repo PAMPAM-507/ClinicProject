@@ -1,0 +1,23 @@
+{% extends 'ClinicWebsite/base.html' %}
+
+{% block content %}
+<h1> Новости </h1>
+
+{% for i in news %}
+
+    <p><a href="{{ i.get_absolute_url }}">{{i.title}}</a></p>
+    <p>{{i.text}}</p>
+    {% if i.photo %}Clinicwebsite/base.html
+        <p><img src = "{{ i.photo.url }}" width="189" height="255"></p>
+    {% endif %}
+    {% if i.timeupdate %}
+        {{i.timeupdate}}
+    {% else %}
+        {{i.time_create}}
+    {% endif %}
+
+    <hr>
+
+{% endfor %}
+
+{% endblock content %}

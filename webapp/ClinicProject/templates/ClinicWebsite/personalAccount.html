@@ -1,0 +1,53 @@
+{% extends 'ClinicWebsite/base.html' %}
+
+{% block content %}
+
+
+    {% if i.name %}
+        <p>ФИО: {{i.name}}</p>
+    {% endif %}
+
+    {% if i.address %}
+        <p>Адрес: {{i.address}}</p>
+    {% endif %}
+
+    {% if i.DateofBirth %}
+        <p>Дата рождения: {{i.DateofBirth}}</p>
+    {% endif %}
+
+    {% if i.telephone %}
+        <p>Телефон: {{i.telephone}}</p>
+    {% endif %}
+
+    {% if i.gender %}
+        <p>Пол: {{i.gender}}</p>
+    {% endif %}
+    
+
+    
+    {% if i.position_id %}
+        <p>Должность: {{i.position.position}}</p>
+    {% endif %}
+
+    {% if i.photo %}
+        <p><img src = "{{ i.photo.url }}" width="189" height="255"></p>
+    {% endif %}
+
+
+<br>
+
+{% if check %}
+    <a href = "{% url 'makeVisitDoctorFromPersonalAcc' userId %}">Создать новую запись</a>
+{% endif %}
+
+<br>
+<br>
+
+<a href = "{% url 'watchVisits' userId %}">История посещений</a>
+
+
+{% endblock content %}
+
+{% if i.level_id %}
+<p>Уровень: {{i.level_id}}</p>
+{% endif %}

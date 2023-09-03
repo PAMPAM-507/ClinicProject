@@ -1,0 +1,22 @@
+{% extends 'ClinicWebsite/baseStaff.html' %}
+
+
+
+
+{% block content %}
+
+{% for i in staff %}
+
+    <p><a href="{{ i.get_absolute_url }}">{{i.name}}</a></p>
+    <p>Должность: {{i.position.position}}</p>
+    {% if i.photo %}
+        <p><img src = "{{ i.photo }}" width="189" height="255"></p>
+    {% endif %}
+
+    <hr>
+
+
+
+{% endfor %}
+
+{% endblock content %}

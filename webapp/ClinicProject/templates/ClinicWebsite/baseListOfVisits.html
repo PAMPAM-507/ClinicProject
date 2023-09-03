@@ -1,0 +1,16 @@
+{% extends 'ClinicWebsite/base.html' %}
+{% load my_filters %}
+
+{% block position %}
+
+{{title}}
+
+{%for i in positions%}
+    {% if i.slug == cur_position %}
+        <p>{{i.position}}</p>
+    {% else %}
+        <p><a href="{{ i.get_absolute_url_for_listOfVisits }}">{{i.position}}</a></p>
+    {% endif %}
+{% endfor %}
+
+{% endblock position %}

@@ -1,0 +1,57 @@
+{% extends 'ClinicWebsite/base.html' %}
+
+{% block content %}
+
+{% for i in visitMenu%}
+    <a href = "{% url 'watchVisits' userId %}?url={{i.url}}">{{i.title}}</a>
+{% endfor %}
+
+<br>
+<br>
+
+Дата выбранного посещения: {{visit.dateOfVisit}}
+<br>
+Клиент: {{visit.client}}
+<br>
+Врач: {{visit.employee}}
+
+<br>
+<br>
+<br>
+
+{% if flag %}
+    <a href = "{% url 'makeDiagnose' userId visit_id %}">Поствить диагноз</a>
+{% endif %}
+<br>
+<br>
+<br>
+<form action="{% url 'makeСonfirmationOfVisit' visit_id %}" method="post">
+    {% csrf_token %}
+    <button type="submit">Подтвердить запись</button>
+</form>
+<br>
+<br>
+<form action="{% url 'dropСonfirmationOfVisit' visit_id %}" method="post">
+    {% csrf_token %}
+    <button type="submit">Убрать подтверждение записи</button>
+</form>
+<br>
+<br>
+<br>
+
+<h2>История посещений {{positionOfDoctor}}а:</h2>
+
+{% for i in history %}
+
+    Дата: {{i.visit__dateOfVisit}} | Диагноз: {{i.disease__name}} | Комментарий: {{i.comment}}
+    <br>
+    <br>
+    <form action="{% url 'dropDiagnose' userId visit_id i.id %}" method="post">
+        {% csrf_token %}
+         <button type="submit">Удалить диагноз</button>
+        </form>
+    <hr>
+
+{% endfor %}
+
+{% endblock content %}

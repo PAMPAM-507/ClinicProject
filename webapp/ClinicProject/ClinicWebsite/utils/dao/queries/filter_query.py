@@ -3,7 +3,7 @@ from typing import Iterable
 
 from ..abstracts.filter_abc import FilterQueryAbstract
 from django.db import models
-from ..abstracts.dao_abs import DAO
+from ClinicWebsite.utils.dao.dao import DAOForModels
 
 
 class FilterQuery(FilterQueryAbstract):
@@ -15,7 +15,6 @@ class FilterQuery(FilterQueryAbstract):
     for example, it can be field of photo.
     """
 
-    def filter_query(self, some_model: models.Model, *args, **kwargs,) -> Iterable[dataclass]:
-        dao = DAO(args, kwargs.get('exceptions'))
-        del kwargs['exceptions']
+    def filter_query(self, some_model: models.Model, *args, exceptions: str = None, **kwargs,) -> Iterable[dataclass]:
+        dao = DAOForModels(args, exceptions)
         return list(map(dao.fill_universal_data_class, some_model.objects.filter(**kwargs)))

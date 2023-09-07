@@ -1,9 +1,9 @@
-venv
+venv*
 **/__pycache__
 **/.idea
 **/.vscode
 **/~*
-**/venv
+**/venv*
 **/setenv.sh
 **/.env.dev
 

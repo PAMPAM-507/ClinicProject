@@ -637,8 +637,8 @@ def testView(request):
 from .utils.dao.queries.all_query import AllQuery
 from .utils.dao.queries.filter_query import FilterQuery
 
-def testView2(request):
 
+def testView2(request):
     print(AllQuery().all_query(News, 'title', 'text', 'slug', exceptions='photo'))
 
     print(FilterQuery().filter_query(Position, 'slug', 'position', 'isDoctor', exceptions='photo', isDoctor=False))

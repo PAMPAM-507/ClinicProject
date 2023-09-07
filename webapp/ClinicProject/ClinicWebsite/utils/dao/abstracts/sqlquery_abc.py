@@ -11,10 +11,12 @@ class SQLQueryAbstract(ABC):
         pass
 
     @staticmethod
-    def push_raw_query(sql: str = 'None', *args, **kwargs):
+    def _push_raw_query(sql: str = 'None', *args, **kwargs):
         if sql == 'None':
             raise ValueError('sql is mandatory variable, this contain str field')
 
         with connection.cursor() as cursor:
             cursor.execute(sql, [*args])
             return list(cursor.fetchall())
+
+

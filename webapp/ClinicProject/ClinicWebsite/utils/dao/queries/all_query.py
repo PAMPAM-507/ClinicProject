@@ -3,7 +3,7 @@ from dataclasses import dataclass
 from typing import Iterable
 
 from ..abstracts.all_abc import AllQueryAbstract
-from ..abstracts.dao_abs import DAO
+from ClinicWebsite.utils.dao.dao import DAOForModels
 from django.db import models
 
 
@@ -16,6 +16,6 @@ class AllQuery(AllQueryAbstract):
     for example, it can be field of photo.
     """
 
-    def all_query(self, some_model: models.Model, *args, exceptions=None) -> Iterable[dataclass]:
-        dao = DAO(args, exceptions)
+    def all_query(self, some_model: models.Model, *args, exceptions: str = None, **kwargs) -> Iterable[dataclass]:
+        dao = DAOForModels(args, exceptions)
         return list(map(dao.fill_universal_data_class, some_model.objects.all()))

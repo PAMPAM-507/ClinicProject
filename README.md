@@ -1,1 +1,1 @@
-# ClinicProject
+# clinic-project
